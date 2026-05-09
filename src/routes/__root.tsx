@@ -15,7 +15,16 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "Idea Drop",
+        title: "Idea Drop - Your Idea Hub",
+      },
+      {
+        name: "description",
+        content:
+          "Share, explore and build on the best startup ideas and side hustles",
+      },
+      {
+        name: "author",
+        content: "Tassos Venetikidis",
       },
     ],
     links: [
