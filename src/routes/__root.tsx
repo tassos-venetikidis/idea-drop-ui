@@ -7,6 +7,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "#/router";
+import Header from "#/components/Header";
 
 import appCss from "../styles.css?url";
 
@@ -55,7 +56,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
-          {children}
+          <div className="min-h-screen bg-gray-100 flex flex-col">
+            <Header />
+            <main className="flex justify-center p-4">
+              <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6">
+                {children}
+              </div>
+            </main>
+          </div>
           <TanStackDevtools
             config={{
               position: "bottom-right",
