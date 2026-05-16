@@ -28,3 +28,16 @@ export async function createIdea(newIdea: {
 export async function deleteIdea(ideaId: string): Promise<void> {
   await api.delete(`/ideas/${ideaId}`);
 }
+
+export async function editIdea(
+  ideaId: string,
+  editedIdea: {
+    title: string;
+    summary: string;
+    description: string;
+    tags: string[];
+  },
+): Promise<Idea> {
+  const res = await api.patch(`/ideas/${ideaId}`, editedIdea);
+  return res.data;
+}
