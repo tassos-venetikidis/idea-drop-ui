@@ -33,7 +33,7 @@ function IdeasPage() {
       <h1 className="text-2xl font-bold mb-4">Ideas</h1>
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {ideas.map((idea) => (
-          <li key={idea.id}>
+          <li key={idea._id}>
             <IdeaCard idea={idea} />
           </li>
         ))}

@@ -15,7 +15,7 @@ function IdeaCard({ idea, button = true }: { idea: Idea; button?: boolean }) {
       <p className="text-gray-600 mb-2">{idea.summary}</p>
       <Link
         to="/ideas/$ideaId"
-        params={{ ideaId: idea.id.toString() }}
+        params={{ ideaId: idea._id.toString() }}
         className={linkClasses}
       >
         {button ? "View Idea" : "Read more →"}

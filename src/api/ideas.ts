@@ -38,6 +38,6 @@ export async function editIdea(
     tags: string[];
   },
 ): Promise<Idea> {
-  const res = await api.patch(`/ideas/${ideaId}`, editedIdea);
+  const res = await api.put(`/ideas/${ideaId}`, editedIdea);
   return res.data;
 }
