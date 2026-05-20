@@ -6,8 +6,10 @@ export async function fetchIdea(ideaId: string): Promise<Idea> {
   return res.data;
 }
 
-export async function fetchIdeas(): Promise<Idea[]> {
-  const res = await api.get("/ideas");
+export async function fetchIdeas(limit?: number): Promise<Idea[]> {
+  const res = await api.get("/ideas", {
+    params: limit ? { _limit: limit } : {},
+  });
   return res.data;
 }
 
