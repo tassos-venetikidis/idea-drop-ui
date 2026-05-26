@@ -36,3 +36,13 @@ export async function loginUser({
     throw new Error(message);
   }
 }
+
+export async function logoutUser() {
+  try {
+    const res = await api.post("/auth/logout");
+    return res.data;
+  } catch (err: any) {
+    const message = err.response?.data?.message || "Failed to logout";
+    throw new Error(message);
+  }
+}
