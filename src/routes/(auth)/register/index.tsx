@@ -39,7 +39,6 @@ function RegisterPage() {
     } catch (error: any) {
       console.error(error.message);
       setError(error.message);
-      alert("Something went wrong...");
     }
   }
 
