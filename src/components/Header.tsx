@@ -1,9 +1,22 @@
+import { logoutUser } from "#/api/auth.tsx";
 import { useAuth } from "#/context/authContext.tsx";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Lightbulb } from "lucide-react";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, setUser, setAccessToken } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    try {
+      await logoutUser();
+      setUser(null);
+      setAccessToken(null);
+      navigate({ to: "/" });
+    } catch (error) {
+      console.log("Logout failed...", error);
+    }
+  }
 
   return (
     <header className="bg-white shadow">
@@ -54,7 +67,10 @@ const Header = () => {
               <span className="text-gray-700 font-medium px-2">
                 Welcome, {user.name}
               </span>
-              <button className="text-red-600 font-medium transition px-3 py-2 leading-none hover:text-red-900">
+              <button
+                onClick={handleLogout}
+                className="text-red-600 font-medium transition px-3 py-2 leading-none hover:text-red-900"
+              >
                 Logout
               </button>
             </>
