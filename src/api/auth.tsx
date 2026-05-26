@@ -17,3 +17,22 @@ export async function registerUser({
     throw new Error(message);
   }
 }
+
+export async function loginUser({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  try {
+    const res = await api.post("/auth/login", {
+      email,
+      password,
+    });
+    return res.data;
+  } catch (err: any) {
+    const message = err.response?.data?.message || "Failed to authenticate";
+    throw new Error(message);
+  }
+}
