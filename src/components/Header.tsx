@@ -38,7 +38,7 @@ const Header = () => {
           {user && (
             <Link
               to="/ideas/new"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium transition px-4 py-2 rounded-md leading-none"
+              className="text-xs sm:text-sm px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium transition sm:px-4 sm:py-2 rounded-md leading-none"
             >
               + New Idea
             </Link>
@@ -64,7 +64,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <span className="text-gray-700 font-medium px-2">
+              <span className="hidden sm:block text-gray-700 font-medium px-2">
                 Welcome, {user.name}
               </span>
               <button
