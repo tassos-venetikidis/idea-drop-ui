@@ -5,6 +5,7 @@ import {
   useMutation,
 } from "@tanstack/react-query";
 import { fetchIdea, deleteIdea } from "#/api/ideas";
+import { useAuth } from "#/context/authContext.tsx";
 
 const ideaQueryOptions = (ideaId: string) =>
   queryOptions({
@@ -22,6 +23,7 @@ function IdeaDetailsPage() {
   const navigate = useNavigate();
   const { ideaId } = Route.useParams();
   const { data: idea } = useSuspenseQuery(ideaQueryOptions(ideaId));
+  const { user } = useAuth();
 
   const { mutateAsync: deleteMutate, isPending } = useMutation({
     mutationFn: deleteIdea,
@@ -44,22 +46,26 @@ function IdeaDetailsPage() {
       </Link>
       <h2 className="text-2xl font-bold">{idea.title}</h2>
       <p className="mt-2">{idea.description}</p>
-      {/* Edit Link */}
-      <Link
-        to="/ideas/$ideaId/edit"
-        params={{ ideaId }}
-        className="inline-block text-sm bg-yellow-500 hover:bg-yellow-600 text-white mt-4 mr-2 px-4 py-2 rounded transition"
-      >
-        Edit
-      </Link>
-      {/* Delete Button */}
-      <button
-        className="text-sm bg-red-600 text-white mt-4 px-4 py-2 rounded transition hover:bg-red-700 disabled:opacity-50"
-        disabled={isPending}
-        onClick={() => handleDelete(idea._id)}
-      >
-        {isPending ? "Deleting..." : "Delete"}
-      </button>
+      {user && user.id === idea.user && (
+        <>
+          {/* Edit Link */}
+          <Link
+            to="/ideas/$ideaId/edit"
+            params={{ ideaId }}
+            className="inline-block text-sm bg-yellow-500 hover:bg-yellow-600 text-white mt-4 mr-2 px-4 py-2 rounded transition"
+          >
+            Edit
+          </Link>
+          {/* Delete Button */}
+          <button
+            className="text-sm bg-red-600 text-white mt-4 px-4 py-2 rounded transition hover:bg-red-700 disabled:opacity-50"
+            disabled={isPending}
+            onClick={() => handleDelete(idea._id)}
+          >
+            {isPending ? "Deleting..." : "Delete"}
+          </button>
+        </>
+      )}
     </div>
   );
 }
