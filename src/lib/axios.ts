@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getStoredAccessToken } from "./authToken.ts";
 
 const base =
   typeof window !== "undefined"
@@ -11,6 +12,11 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+api.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${getStoredAccessToken()}`;
+  return config;
 });
 
 export default api;
