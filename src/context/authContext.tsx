@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { refreshAccessToken } from "#/api/auth.tsx";
+import { setStoredAccessToken } from "#/lib/authToken.ts";
 
 type AuthContextType = {
   accessToken: string | null;
@@ -31,12 +32,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           await refreshAccessToken();
         setAccessToken(newAccessToken);
         setUser(user);
+        setStoredAccessToken(newAccessToken);
       } catch (err: any) {
         console.log("Failed to refresh token", err);
       }
     }
     loadAuth();
   }, []);
+
+  useEffect(() => {
+    setStoredAccessToken(accessToken);
+  }, [accessToken]);
 
   return (
     <AuthContext.Provider
