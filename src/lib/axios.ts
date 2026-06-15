@@ -2,13 +2,8 @@ import axios from "axios";
 import { getStoredAccessToken, setStoredAccessToken } from "./authToken.ts";
 import { refreshAccessToken } from "#/api/auth.tsx";
 
-const base =
-  typeof window !== "undefined"
-    ? window.location.origin
-    : "http://localhost:3000";
-
 const api = axios.create({
-  baseURL: `${base}/api`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
